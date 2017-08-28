@@ -68,4 +68,31 @@ class Welcome extends CI_Controller {
 			echo "未查到指定文章！";
 		}
 	}
+	public function comment(){
+		$this -> load -> model('comment_model');
+		$username = $this -> input -> post('username');
+		$email = $this -> input -> post('email');
+		$phone = $this -> input -> post('phone');
+		$message = $this -> input -> post('message');
+		$blog_id = $this -> input -> post('blogId');
+		$rows = $this -> comment_model -> save($username, $email, $phone, $message, $blog_id);
+		if($rows > 0){
+			echo 'success';
+		}else{
+			echo 'fail';
+		}
+	}
+	public function list_blog(){
+		$this -> load -> model('blog_model');
+		$blogs = $this -> blog_model -> get_by_page();
+		$this -> load -> view('blog_list',array(
+			'blogs' => $blogs 
+			));
+	}
+	public function get_more(){
+		$this -> load -> model('blog_model');
+		$offset = $this -> input -> get('offset');
+		$blogs = $this -> blog_model -> get_by_page($offset);
+		echo json_encode($blogs);
+	}
 }

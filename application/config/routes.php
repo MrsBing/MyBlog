@@ -40,6 +40,13 @@
 
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
+$route['admin'] = 'admin/welcome/login';
+$route['admin/blog/(:num)'] = 'admin/welcome/mgr_blog/$1';
+$route['admin/blog/(:num)/(:num)'] = 'admin/welcome/mgr_blog/$1/$2';
+$route['admin/(:any)'] = 'admin/welcome/$1';
+$route['admin/category'] = 'admin/welcome/mgr_category';
+$route['admin/blog'] = 'admin/welcome/mgr_blog';
+$route['admin/comment'] = 'admin/welcome/mgr_comment';
 
 
 /* End of file routes.php */
